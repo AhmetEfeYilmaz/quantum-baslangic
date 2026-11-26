@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>IP 12 - Egitim Cuzdan Olusturucu</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 760px; margin: 32px auto; padding: 0 16px; background: #0f172a; color: #e2e8f0; }
+    button { padding: 10px 16px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; background: #3b82f6; color: white; }
+    button.secondary { background: #334155; margin-left: 8px; font-size: 12px; padding: 6px 10px; }
+    .card { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 14px; margin-top: 14px; }
+    .label { font-size: 13px; color: #94a3b8; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+    .val { font-family: monospace; word-break: break-all; background: #0b1120; padding: 8px; border-radius: 4px; color: #38bdf8; }
+    .blur { filter: blur(5px); user-select: none; }
+  </style>
+</head>
+<body>
+  <h2>IP 12: Adim Adim Ethereum Egitim Cuzdani</h2>
+  <p style="color:#94a3b8; font-size:14px;">Tamamen yerel calisir; hicbir veri disari gonderilmez. (Yalnizca test/egitim amaclidir.)</p>
+  <button id="btnGenerate">Yeni Egitim Cuzdani Olustur</button>
+
+  <div id="output" style="display:none;">
+    <div class="card">
+      <div class="label"><span>1. 128-bit Entropi (crypto.getRandomValues)</span><button class="secondary" onclick="toggleMask('v-entropy')">Goster / Gizle</button></div>
+      <div id="v-entropy" class="val blur"></div>
+    </div>
+    <div class="card">
+      <div class="label"><span>2. BIP39 Mnemonic (12 Ingilizce Kelime - Passphrase Bos)</span><button class="secondary" onclick="toggleMask('v-mnemonic')">Goster / Gizle</button></div>
+      <div id="v-mnemonic" class="val blur"></div>
+    </div>
+    <div class="card">
+      <div class="label"><span>3. BIP39 Seed (512-bit)</span><button class="secondary" onclick="toggleMask('v-seed')">Goster / Gizle</button></div>
+      <div id="v-seed" class="val blur"></div>
+    </div>
+    <div class="card">
+      <div class="label"><span>4. Private Key (BIP32/BIP44 Yol: m/44'/60'/0'/0/0)</span><button class="secondary" onclick="toggleMask('v-priv')">Goster / Gizle</button></div>
+      <div id="v-priv" class="val blur"></div>
+    </div>
+    <div class="card">
+      <div class="label"><span>5. Public Key (secp256k1)</span></div>
+      <div id="v-pub" class="val"></div>
+    </div>
+    <div class="card">
+      <div class="label"><span>6. Ethereum Adresi (EIP-55)</span></div>
+      <div id="v-addr" class="val" style="color:#4ade80; font-weight:bold;"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.4/ethers.min.js";
+
+    window.toggleMask = (id) => {
+      document.getElementById(id).classList.toggle("blur");
+    };
+
+    document.getElementById("btnGenerate").addEventListener("click", () => {
+      // 1. Kriptografik olarak guvenli 128-bit (16 byte) entropi uretimi
+      const entropyBytes = new Uint8Array(16);
+      crypto.getRandomValues(entropyBytes);
+      const entropyHex = ethers.hexlify(entropyBytes);
+
+      // 2. Entropiden BIP39 12 kelimelik mnemonic uretimi (bos passphrase)
+      const mnemonicObj = ethers.Mnemonic.fromEntropy(entropyBytes, "");
+      const phrase = mnemonicObj.phrase;
+
+      // 3. Mnemonic'ten 512-bit seed hesaplama
+      const seedHex = mnemonicObj.computeSeed();
+
+      // 4. Seed ve BIP44 yolu (m/44'/60'/0'/0/0) ile HD dugum ve private key turetimi
+      const rootNode = ethers.HDNodeWallet.fromSeed(seedHex);
+      const derivedWallet = rootNode.derivePath("m/44'/60'/0'/0/0");
+      const privateKey = derivedWallet.privateKey;
+
+      // 5. Private key'den public key uretimi (secp256k1)
+      const signingKey = new ethers.SigningKey(privateKey);
+      const publicKey = signingKey.publicKey; // sıkıştırılmış (compressed) public key; .uncompressedPublicKey de alınabilir
+
+      // 6. Public key'den Ethereum adresi hesaplama
+      const address = ethers.computeAddress(publicKey);
+
+      document.getElementById("v-entropy").textContent = entropyHex;
+      document.getElementById("v-mnemonic").textContent = phrase;
+      document.getElementById("v-seed").textContent = seedHex;
+      document.getElementById("v-priv").textContent = privateKey;
+      document.getElementById("v-pub").textContent = publicKey;
+      document.getElementById("v-addr").textContent = address;
+      document.getElementById("output").style.display = "block";
+    });
+  </script>
+</body>
+</html>
