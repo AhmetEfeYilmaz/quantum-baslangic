@@ -6,6 +6,14 @@ Birbirleriyle İlişkisi:
 
 • Ağa gönderilen işlemler doğrulanarak bir araya getirilir ve bir blok içine yazılır, her blok kendinden önceki bloğun şifrelenmiş izini taşıdığı için bu bloklar birleşerek kesintisiz olarak blokzinciri oluşturur. Bu zincirin ağdaki bütün bilgisayarlarda tutulmasına da bu yapıyı bir dağınık defter haline getirir.
 
+• Merkezi veritabanında kayıtları ekleme, silme veya değiştirme yetkisi tek bir yöneticiye ya da kuruma aittir, bu yüzden kullanıcı o merkezin dürüstlüğüne ve güvenliğine güvenmek zorundadır. Blokzincirde ise kayıtlar ağdaki düğümler arasında dağıtık tutulur, geçmiş veriler kriptografik olarak kilitlendiği için tek taraflı değiştirilemez ve güven tek bir kuruma değil protokol kurallarına dayanır.
+
+• Geçmiş işlemin kaydı bir kez bloğa girip kesinleştikten sonra zincir tarihçesinde silinmeden ve değiştirilmeden kalır. Sözleşmede tutulan güncel değer (state) ise yeni işlemler geldikçe kuralına uygun şekilde güncellenebilir; yani eski kayıt tarihçede dururken mevcut son durum değişmiş olur.
+
+• Etkinlik kayıt sisteminde blokzincir kullanmanın yararı kayıtların herkesçe şeffaf biçimde doğrulanabilmesi, sonradan kimsenin müdahale edememesi ve tek bir merkeze bağımlı kalınmamasıdır. Ek maliyeti ise her kayıt/güncelleme için işlem ücreti (gas) ödenmesi, işlemin ağda onaylanma süresinin normal veritabanına göre yavaş olması ve cüzdan yönetimi gerektirmesidir.
+
+• Benim yorumum: Verilerin çok hızlı işlenmesi gereken, sık sık güncelleme veya silme yapılan, yüksek gizlilik gerektiren ve tek bir kurumun yönetiminde olup dış taraflara merkeziyetsiz güven kanıtı sunma ihtiyacı olmayan durumlarda normal veritabanını tercih ederdim.
+
 
 **İP O2:Node ve Konsensüs**
 
@@ -117,7 +125,7 @@ yöntemdir.
 • Beklenen Çıktılar ve Değerlendirme: Süreç 4 aşamalıdır ve puanlama ağırlıkları şöyledir: Proje Ön Değerlendirme Raporu (%10), Proje Sunum Raporu (%15 - varsa kaynak kodlar da incelenir), Özet Proje Sunum Puanlaması / Çevrim İçi Sunum (%15) ve Final Sunum Puanlaması (%60). Projeler katma değer/yenilikçilik, teknoloji kullanımı, uygulanabilirlik, yaygın etki ve sürdürülebilirlik kriterlerine göre puanlanır.   
 
 • Kavram Açıklamaları: DLT (Dağıtık Defter Teknolojisi), verilerin merkezi bir sunucu yerine ağdaki katılımcılar arasında senkronize ve değiştirilemez biçimde tutulduğu sistemlerin genel adıdır. MPC (Çok Taraflı Hesaplama), özel anahtarı parçalara bölerek anahtarı birleştirmeden ortak imza atmayı sağlayan yöntemdir. Proof of Reserve (PoR), bir kurumun beyan ettiği varlıkların gerçekten rezervde bulunduğunu kriptografik olarak kanıtlamasıdır. Travel Rule, belirli tutar üstü transferlerde gönderici-alıcı bilgisinin paylaşılmasını gerektiren regülasyon kuralıdır. Homomorfik Şifreleme, verinin şifresini çözmeden şifreli hali üzerinde işlem yapabilmeyi sağlayan şifreleme yöntemidir. Sharding/Sidechain/Rollup ise ana zincirin işlem kapasitesini artırmak için ağı parçalama, yan zincir kurma veya işlemleri dışarıda toplayıp ana zincire özetleme ölçekleme yaklaşımlarıdır. 
-  
+
 • Benim yorumum: Bu programda öğrendiğim akıllı sözleşme mimarisi, zincir içi (on-chain) ile zincir dışı (off-chain) veri ayrımı, cüzdan güvenliği ve RPC/event tabanlı uygulama geliştirme konularının yarışmada en çok işe yarayacağını düşünüyorum. Şartnamede teknolojinin etkin kullanımı, uygulanabilirlik ve kaynak kod incelemesi öne çıktığı için hangi verinin zincirde tutulup hangisinin dışarıda işleneceğini doğru kurgulamak prototip geliştirirken belirleyici olacaktır.   
 
    
