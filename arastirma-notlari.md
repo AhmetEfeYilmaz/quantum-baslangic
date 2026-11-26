@@ -128,6 +128,48 @@ yöntemdir.
 
 • Benim yorumum: Bu programda öğrendiğim akıllı sözleşme mimarisi, zincir içi (on-chain) ile zincir dışı (off-chain) veri ayrımı, cüzdan güvenliği ve RPC/event tabanlı uygulama geliştirme konularının yarışmada en çok işe yarayacağını düşünüyorum. Şartnamede teknolojinin etkin kullanımı, uygulanabilirlik ve kaynak kod incelemesi öne çıktığı için hangi verinin zincirde tutulup hangisinin dışarıda işleneceğini doğru kurgulamak prototip geliştirirken belirleyici olacaktır.   
 
-   
- 
+**IP11:Çalışma Ortamını Hazırla**
 
+• Git: Dosyalarda yapılan değişiklikleri adım adım takip etmeyi, geçmiş sürümlere dönmeyi ve ekip halinde çakışma olmadan kod geliştirmeyi sağlayan dağıtık bir versiyon kontrol sistemidir.
+
+• GitHub: Git ile yönetilen projelerin ve depoların internet üzerinde barındırılmasını, yedeklenmesini, paylaşılmasını ve takım çalışması yapılmasını sağlayan bulut tabanlı platformdur.   
+
+• README: Bir projenin veya GitHub deposunun ana sayfasında görünen, projenin amacını, içeriğini, kurulum adımlarını ve nasıl kullanılacağını özetleyen tanıtım dosyasıdır (genellikle README.md).   
+
+• Commit: Proje klasöründe yapılan değişikliklerin, ne yapıldığını anlatan kısa bir açıklama mesajıyla birlikte yerel Git geçmişine kalıcı bir kayıt noktası olarak işlenmesidir.   
+
+• Push: Yerel bilgisayarda commit ile kaydedilmiş değişikliklerin, uzak sunucudaki (örneğin GitHub üzerindeki) depoya gönderilip eşitlenmesi işlemidir.
+
+• Solidity, Ethereum ve EVM uyumlu blokzincirlerde çalışacak akıllı sözleşmeleri yazmak için kullanılan programlama dilidir. Remix IDE ise herhangi bir kurulum gerektirmeden doğrudan tarayıcı üzerinden Solidity kodu yazmayı, derlemeyi, test etmeyi ve ağa deploy etmeyi sağlayan geliştirme ortamıdır.
+
+• Bu kurulum sürecinde Remix IDE ve MetaMask'in doğrudan tarayıcı üzerinden akıllı sözleşme ve test ağıyla iletişim kurma yapısı benim için yeniydi.
+
+**IP12: Kendi Cüzdan Oluşturucunu Yaz**
+
+• Kullanılan Dönüşümler ve Kütüphane Çağrıları:
+
+• Entropi: Tarayıcının yerleşik crypto.getRandomValues(new Uint8Array(16)) fonksiyonu ile tahmin edilemez 128-bit (16 bayt) rastgele veri üretildi.
+
+• Mnemonic (BIP39): ethers.Mnemonic.fromEntropy(entropyBytes, "") çağrısı ile entropiye checksum bitleri eklenip 12 İngilizce kelimeye dönüştürüldü (ek passphrase boş bırakıldı).
+
+• Seed: mnemonicObj.computeSeed() ile 12 kelimeden PBKDF2 tabanlı 512-bit kök seed üretildi.
+
+• Private Key (BIP32/BIP44): ethers.HDNodeWallet.fromSeed(seedHex).derivePath("m/44'/60'/0'/0/0") ile Ethereum'un standart ilk hesap yolundaki 32 baytlık private key türetildi.
+
+• Public Key: new ethers.SigningKey(privateKey).publicKey ile eliptik eğri (secp256k1) çarpımı yapılarak public key elde edildi.
+
+• Ethereum Adresi: ethers.computeAddress(publicKey) ile sıkıştırılmamış public key'in Keccak-256 özetinin son 20 baytı alınıp EIP-55 formatında adres oluşturuldu.
+
+• Uygulamamda gördüğüm üzere mnemonic (12 kelime) bütün cüzdan ağacının kökünü oluşturan ve birden fazla hesabı geri getirebilen bir yedekleme anahtarıdır, private key ise o mnemonic'ten belirli bir türetme yoluyla (m/44'/60'/0'/0/0) çıkarılan ve yalnızca tek bir Ethereum hesabının işlemlerini imzalamaya yarayan 32 baytlık gizli anahtardır.
+ 
+**IP13: MetaMask ile Karşılaştır ve Checksum Deneyi Yap**
+
+• İstenilen görevler ve karşılaştırmalar yapıldı ekran görüntüleri alındı.
+
+• Geçerli mnemonic ile güvenli biçimde üretilmiş mnemonic aynı şey değildir. Bir mnemonic'in geçerli sayılması için sadece BIP39 kelime listesindeki kelimelerden oluşması ve sonundaki 4 bitlik checksum kontrolünden geçmesi yeterlidir
+
+![IP 13 ekran görüntüleri](images/1.png)
+
+![IP 13 ekran görüntüleri](images/2.png)
+
+![IP 13 ekran görüntüleri](images/3.png)
