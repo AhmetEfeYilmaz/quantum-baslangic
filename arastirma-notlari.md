@@ -79,7 +79,46 @@ Birbirleriyle İlişkisi:
 
   • Pending işlemin havuza ulaştığı ve mempoolda beklediği daha bir bloğa eklenmediği aşamadır. Receipt işlemin bir bloğa alındıktan sonra yürütülen kayıt özetine denir. Hangi blokta işlendiğini, gas used değerini logları ve statusu içerir. Status işlemin EVM içinde başarılı mı yoksa başarısız mı olduğunu belirtir, genellikle 1 başarılı 0 başarısız kabul edilir. Hash yalnızca işlemin kimliğini gösterir işlemin pending olabileceğini başarısız olabileceğini veya diğer durumları ortaya koymaz. Kesin bir sonuç için receipt ile statuse baklılır.
 
+• İşlem Akış Şeması:
+İmzalama (İşlem verisi hazırlanıp private key ile imzalanır) → Gönderme (İmzalı işlem RPC üzerinden ağa iletilir ve txHash oluşur) → Bekleme / Pending (İşlem mempool havuzunda bloğa girmeyi bekler) → Bloğa Alınma (Doğrulayıcılar işlemi bloğa alıp EVM üzerinde çalıştırır ve receipt/status üretir) → Sonuç Kontrolü (Receipt üzerinden status değerinin 1 mi 0 mı olduğu kontrol edilir).
+
+• Sonucunu öğrenemedim henüz netleşmemiş veya ağ/RPC kaynaklı ulaşılamamış bir durumu gösterirken, işlem başarısız (status = 0) işlemin çalışıp hata nedeniyle geri alındığı kesin olumsuz sonucu ifade eder.
+
+
+  **İP O8:Ekosistemi Tanı** 
+
+• Web3 merkezi platformlar ve aracılar yerine kullanıcıların cüzdan ve akıllı sözleşmelerle veri ve varlık yönetimini doğrudan yapabildiği internet yapısıdır. L1 güvenliği ve mutabakatı kendi üzerinde sağlayan ana blokzincir (Ethereum gibi), L2 ise ana zincirdeki yoğunluğu ve ücretleri azaltmak için işlemleri üst katmanda toplayıp güvenliği L1'e dayandıran ölçekleme katmanıdır. DeFi aracılar olmadan akıllı sözleşmelerle takas, borç verme gibi finansal işlemlerin yapıldığı sistemdir. DAO kuralları ve yönetim kararları akıllı sözleşmeler ve oylamalarla yürütülen topluluk yapısıdır. Oracle akıllı sözleşmelerin zincir dışındaki fiyat, hava durumu gibi gerçek dünya verilerine ulaşmasını sağlayan veri köprüsüdür. Bridge farklı blokzincir ağları arasında varlık veya veri aktarımını sağlayan köprü sistemidir. Zero-Knowledge Proof (ZK) ise bir bilginin veya hesaplamanın doğruluğunu, gizli olan asıl veriyi karşı tarafa açmadan matematiksel olarak kanıtlayan 
+yöntemdir.   
+
+• Kullanım Örnekleri: Dijital kimlik için kişinin açık kimlik bilgilerini vermeden sadece 18 yaşından büyük olduğunu kanıtladığı cüzdan tabanlı doğrulama sistemi örnek verilebilir. RWA için gayrimenkul hissesinin veya hazine bonosunun zincir üzerinde token haline getirilmesi örnek gösterilebilir. DePIN için ise bireylerin kendi internet erişim noktalarını veya depolama cihazlarını ağa bağlayıp hizmet karşılığı ödül kazandığı altyapı ağları örnek verilebilir.   
+
+• ZK ile bir koşulun veya hesaplamanın kurallara uygun doğru olduğu kanıtlanır, doğum tarihi veya bakiye gibi gizli girdiler ise karşı tarafa gösterilmeden saklanır. Örneğin sisteme tam doğum tarihini vermeden sadece 18 yaşından büyük olunduğu kanıtlanabilir. "ZK kullanılıyor" ifadesi bütün işlemlerin gizli olduğu anlamına gelmez; ZK-rollup gibi sistemlerde ZK kanıtı sadece işlem doğruluğu ve ölçekleme için kullanılırken adres ve işlem bilgileri açık kalabilir. 
+
+• DAO'yu en son öğrenmek istiyorum; çünkü önce blokzincir altyapısını, akıllı sözleşmelerin çalışmasını ve temel ağ/ölçekleme mekanizmalarını oturtup, yönetişim ve karar süreçlerini bu teknik temelin üzerine inşa etmek daha mantıklı geliyor.
+
+**IP09:Gerçek Bir Blokzincir Projesini İncele**
+
+• Seçilen Proje: Safe (eski adıyla Gnosis Safe). Resmî sitesi: safe.global | Resmî dokümantasyonu: docs.safe.global.   
+
+• Tek bir özel anahtarın kaybolması, çalınması veya tek kişinin hatalı/kötü niyetli işlem yapması riskine karşı hesap kontrolünü birden fazla imzalayıcıya (M-of-N eşik mantığı) ve kurallara paylaştırır; ekipler, hazine yöneten projeler ve kurumlar için uygundur. Zincirde yapılan işlemler Safe akıllı sözleşme hesabının oluşturulması, sahip/eşik kurallarının tutulması ve yeterli imza toplandığında asıl işlemin yürütülmesidir. Zincir dışında yapılan hizmetler ise web arayüzü, imzalayıcıların işlemleri görüp onayladığı koordinasyon servisi (Transaction Service) ve geçmiş verileri hızlı sorgulayan indeksleme altyapılarıdır.  
+
+• Varlıkların ve yetkilendirme kurallarının tek bir sunucu yerine herkesçe doğrulanabilen akıllı sözleşmelerde ve kriptografik imzalarda tutulmasını sağlamak için blokzincir kullanır. Normal bir veritabanıyla yapılsaydı veritabanı yöneticisi onay kayıtlarını veya bakiyeleri tek taraflı değiştirebilir, işlemleri sansürleyebilir ve sistem kapandığında kullanıcılar varlıklarına kendi anahtarlarıyla erişemezdi.   
+
+• Safe'te asıl güvenlik akıllı sözleşmedeki kurallarda durur. Yönetici/diğer imzalayıcılara işlem onay aşamasında anahtarlarını koruyacakları ve kötü niyetli onay vermeyecekleri konusunda güvenilir (ancak tek başlarına fon kaçıramazlar). İşletmeciye (arayüz ve Transaction Service) işlemlerin toplanması ve ekranda doğru gösterilmesi aşamasında güvenilir (çökse bile fonlar sözleşmede güvendedir). Veri sağlayıcısına (RPC ve indexer) ise cüzdan bakiyesi ve onay durumunu okurken doğru bilgi sunduğu konusunda güvenilir. 
+
+• Benim yorumum: Safe'in en güçlü tarafı tek anahtar bağımlılığını ortadan kaldırıp ekip ve hazine yönetiminde yüksek güvenlik sunmasıdır. Sınırlaması ise her işlem için birden fazla kişinin onay vermesi gerektiğinden işlem hızının tek anahtarlı cüzdana göre yavaş olması ve onay/yürütme adımlarında gas maliyeti oluşmasıdır. 
+
+**İP 10: Blokzincir Yarışması Şartnamesini İncele**
+
+• İncelenen Resmî Şartname: TEKNOFEST 2026 Havacılık, Uzay ve Teknoloji Festivali Blokzincir Yarışması Teknik Şartnamesi (Versiyon 1.1). Takımlar danışman hariç 2-5 kişiden oluşur, en fazla 1 danışman eklenebilir ve süreçler KYS sistemi üzerinden yürütülür. 
+
+• Yarışma merkeziyetsizlik, şeffaflık ve değiştirilemezlik ilkeleriyle kamu yönetimi, eğitim, finans, sağlık ve tedarik zinciri gibi güven gerektiren alanlardaki gerçek dünya problemlerine çözüm üretmeyi amaçlar. Yarışmanın kabul ettiği 7 ana kapsam: Yüksek Başarımlı ve Ölçeklenebilir DLT Altyapıları, DLT Sistemlerinde Mahremiyet, Dijital Cüzdanlar, Blokzincir Kriptolojisi, Blokzincir Güvenliği, Kripto Varlık Regülasyon Altyapıları ve Seçilmiş DLT Uygulama Alanları (Dijital Kimlik, Orijin Takibi, DeFi, Tokenizasyon, Web3/DAO).   
+
+• Beklenen Çıktılar ve Değerlendirme: Süreç 4 aşamalıdır ve puanlama ağırlıkları şöyledir: Proje Ön Değerlendirme Raporu (%10), Proje Sunum Raporu (%15 - varsa kaynak kodlar da incelenir), Özet Proje Sunum Puanlaması / Çevrim İçi Sunum (%15) ve Final Sunum Puanlaması (%60). Projeler katma değer/yenilikçilik, teknoloji kullanımı, uygulanabilirlik, yaygın etki ve sürdürülebilirlik kriterlerine göre puanlanır.   
+
+• Kavram Açıklamaları: DLT (Dağıtık Defter Teknolojisi), verilerin merkezi bir sunucu yerine ağdaki katılımcılar arasında senkronize ve değiştirilemez biçimde tutulduğu sistemlerin genel adıdır. MPC (Çok Taraflı Hesaplama), özel anahtarı parçalara bölerek anahtarı birleştirmeden ortak imza atmayı sağlayan yöntemdir. Proof of Reserve (PoR), bir kurumun beyan ettiği varlıkların gerçekten rezervde bulunduğunu kriptografik olarak kanıtlamasıdır. Travel Rule, belirli tutar üstü transferlerde gönderici-alıcı bilgisinin paylaşılmasını gerektiren regülasyon kuralıdır. Homomorfik Şifreleme, verinin şifresini çözmeden şifreli hali üzerinde işlem yapabilmeyi sağlayan şifreleme yöntemidir. Sharding/Sidechain/Rollup ise ana zincirin işlem kapasitesini artırmak için ağı parçalama, yan zincir kurma veya işlemleri dışarıda toplayıp ana zincire özetleme ölçekleme yaklaşımlarıdır. 
   
+• Benim yorumum: Bu programda öğrendiğim akıllı sözleşme mimarisi, zincir içi (on-chain) ile zincir dışı (off-chain) veri ayrımı, cüzdan güvenliği ve RPC/event tabanlı uygulama geliştirme konularının yarışmada en çok işe yarayacağını düşünüyorum. Şartnamede teknolojinin etkin kullanımı, uygulanabilirlik ve kaynak kod incelemesi öne çıktığı için hangi verinin zincirde tutulup hangisinin dışarıda işleneceğini doğru kurgulamak prototip geliştirirken belirleyici olacaktır.   
 
    
  
