@@ -208,7 +208,7 @@ USDC Transferi (1 USDC): 0x83ce513270e0c45aa0fa0c4e29ed90a6827263dd8dcccc03bf388
 | **To (Alıcı)** | Doğrudan Account 2 adresi (`0xBcF24B...6551`) | USDC sözleşme adresi (`0x1c7D4B...7238`) |
 | **Value** | `0.00001 ETH` | `0 ETH` (native ETH gönderilmediği için) |
 | **Input Data** | Boş (`0x`) | `transfer(address,uint256)` fonksiyon çağrısı ve parametreleri |
-| **Ücret (Fee)** | Düşük — sabit 21.000 gas (0.000227668502276685 ) | Daha yüksek — akıllı sözleşme çalıştığı için (0.000306900003069 ) |
+| **Ücret (Fee)** | 0.000306900003069 ETH (Normalde standart ETH transferi 21.000 gas harcar; bu işlemde akıllı hesap yapısı nedeniyle daha yüksek çıktı) | 0.000227668502276685 ETH (Akıllı sözleşme çağrısı ücreti ETH olarak ödendi) |
 | **Token Transferi / Log** | Log yok (doğrudan native transfer) | `Logs` sekmesinde ERC-20 `Transfer` olayı (event) kayıtlı |
 
 • Circle faucet üzerinden 20 Test USDC istenildiğinde transfer blokzincirdeki USDC akıllı sözleşmesine işlenir ve varlık zincir üzerinde hesaba aktarılmış olur. MetaMask'te Tokenları içe aktar işlemi ise zincire herhangi bir veri yazmaz yalnızca cüzdan arayüzünün ilgili sözleşme adresini okuyup bakiyeyi ekranda göstermesini sağlar.
