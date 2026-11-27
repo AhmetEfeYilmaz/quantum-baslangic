@@ -15,7 +15,7 @@ Birbirleriyle İlişkisi:
 • Benim yorumum: Verilerin çok hızlı işlenmesi gereken, sık sık güncelleme veya silme yapılan, yüksek gizlilik gerektiren ve tek bir kurumun yönetiminde olup dış taraflara merkeziyetsiz güven kanıtı sunma ihtiyacı olmayan durumlarda normal veritabanını tercih ederdim.
 
 
-**İP O2:Node ve Konsensüs**
+**İP 02:Node ve Konsensüs**
 
 • Node bir blokzincirin protokol yazılımını çalıştıran kayıtların kopyasını tutan bir bilgisayar veya yazılımdır. Gelen işlemleri kontrol ederek diğer nodelara iletir.
 
@@ -29,7 +29,7 @@ Birbirleriyle İlişkisi:
 
 • Çoklu düğümlü bir yapıda bulunan blokzincirde tek bir düğümün çökmesi bence ağı durdurmaz ama o düğüm kritik bir rolü tek başına üstleniyorsa o düğümün çökmesi bütün bir ağı çökertebilir.
 
- **İP O3:Kriptografi ve Cüzdan**
+ **İP 03:Kriptografi ve Cüzdan**
 
 • Hash tek yönlüdür geri döndürülemez verinin bütünlüğünü ve parmak izini üretir. Şifreleme verinin gizliliğini sağlar anahtarla geri döndürülebilir,okunmasını engeller. Dijital imza kimlik doğrulamasıdır verinin kimden geldiğini doğrular.
 
@@ -41,7 +41,7 @@ Birbirleriyle İlişkisi:
 
 • Cüzdan uygulanmasının silinmesi tek başına bir sorun teşkil etmez varlıklar hala aynı yerinde duruyor olur, kurtarma bilgisinin kaybında ise varlıklar zincirde gözükmeye devam etse bile onlar üstünde işlem yapma yetkisi kaybolur.
 
- **İP O4:Bitcoin Ethereum ve Token**
+ **İP 04:Bitcoin Ethereum ve Token**
 
 • Bitcoinin temel amacı eşler arası merkeziyetsiz bir para saklama aracı sunmak. Programlanabilirliği bilerek sınırlı ve odaklıdır örnek olarak çoklu imza, zaman kuralları kullanılarak parasal güvenliği öncelemek üzere tasarlanmıştır. Ethereumun temel amacı programlanabilir bir dağıtık durum makinesi sunmaktır. Akıllı sözleşmeler ve sanal makinesi sayesinde karmaşık uygulamaların, protokollerin zincir üzerinde doğrudan çalışmasını hedeflemiştir.
 
@@ -53,7 +53,7 @@ Birbirleriyle İlişkisi:
 
 • Etkinliğe giriş için token gerekmez erişim hakkı doğrudan bir akıllı sözleşmedeki izin listesi kriptografik imza veya o anki bir şartın sağlanmasıyla da kontrol edilebilir. Her erişim kuralının alınıp satılan bir token olması zorunlu değildir. Bunlara ek olarak zincir dışı olarak merkezi veri tabanı kaydı, dacet listesi veya kimlik ve e posta doğrulaması gibi işlemler de token olmadan iş görür.
 
- **İP O5:Akıllı Sözleşme ve ABI**
+ **İP 05:Akıllı Sözleşme ve ABI**
 
 • Akıllı sözleşme blokzincirinin üzerinde çalışan kuralları önceden belirlenmiş ve bu kurallara göre işlem mantığını yürüten ve kendi statetini yönetebilen programdır. EVM(Ethereum Virtual Machine) tüm nodeların işlemlerini aynı sonuçla çalıştırabilmesini sağlayan izole bir sanal makinedir. Kaynak kodu bytecode komutlarını gas sınırları içinde yürütür. State ağdaki hesapların ve sözleşmelerin güncel verilerinin anlık toplamıdır. Her geçerli işlem eskisinden yeni state bir geçiş üretir.
 
@@ -67,7 +67,7 @@ Birbirleriyle İlişkisi:
 
 • Kod şablonu aynı olsa bile her dağıtım kendine has izole bir state alanına sahip bağımsız bir sözleşme oluşturduğundan kayıtları ayrı olabilir.
 
- **İP O6:RPC Explorer ve Event**
+ **İP 06:RPC Explorer ve Event**
 
  • RPC(Remote Procedure Call) dış bir uygulama veya web arayüzü,cüzdan betik gibi istemcilerin, ağdaki bir düğümee sanki lokal bir fonksiyon çağırıyor gibi istek göndermesini sağlayan iletişim protokolüne denir. RPC endpoint bu isteklerin gönderildiği somut adrestir http:// gibi. Node blokzincirin verisini tutan ve protokol kurallarını çalıştıran birimdir kendi düğümünü kurmak isteyen kullanıcılar ise RPC hizmet sağlayıcısını kullanır.
 
@@ -77,7 +77,7 @@ Birbirleriyle İlişkisi:
 
  • Explorer yoksa doğrudan düğüm RPC sorgulama hattını araştırırım. Güvenilir bir RPC üzerinden doğrudan düğüm sorguları yapıp veriyi ABI ile çözümleyerek kayıt doğrulanır.
 
-  **İP O7:Bir İşlemin Yolculuğu** 
+  **İP 07:Bir İşlemin Yolculuğu** 
 
   • Cüzdan bağlamak web veya uygulama arayüzü üzerinden cüzdan eklentisi veya bir sağlayıcı kullanarak kullanıcının aktif hesapını,adresini ve ağ bilgisini okutmasıdır. Mesaj imzalama kullanıcının özel anahtarıyla belirli bir metni veya herhangi bir yapılandırılmış veriyi imzalamasıdır. Genellikle state'i değiştirmez gas ücreti kullanılmaz. İşlem göndermek ise state'i değiştirecek imzalı olan bir veri paketinin ağa yayınlanmasıdır. Mempoola girer, bloğa alınır ve ağdaki düğümler tarafından işlenir, gas ücreti alınır.
 
@@ -93,7 +93,7 @@ Birbirleriyle İlişkisi:
 • Sonucunu öğrenemedim henüz netleşmemiş veya ağ/RPC kaynaklı ulaşılamamış bir durumu gösterirken, işlem başarısız (status = 0) işlemin çalışıp hata nedeniyle geri alındığı kesin olumsuz sonucu ifade eder.
 
 
-  **İP O8:Ekosistemi Tanı** 
+  **İP 08:Ekosistemi Tanı** 
 
 • Web3 merkezi platformlar ve aracılar yerine kullanıcıların cüzdan ve akıllı sözleşmelerle veri ve varlık yönetimini doğrudan yapabildiği internet yapısıdır. L1 güvenliği ve mutabakatı kendi üzerinde sağlayan ana blokzincir (Ethereum gibi), L2 ise ana zincirdeki yoğunluğu ve ücretleri azaltmak için işlemleri üst katmanda toplayıp güvenliği L1'e dayandıran ölçekleme katmanıdır. DeFi aracılar olmadan akıllı sözleşmelerle takas, borç verme gibi finansal işlemlerin yapıldığı sistemdir. DAO kuralları ve yönetim kararları akıllı sözleşmeler ve oylamalarla yürütülen topluluk yapısıdır. Oracle akıllı sözleşmelerin zincir dışındaki fiyat, hava durumu gibi gerçek dünya verilerine ulaşmasını sağlayan veri köprüsüdür. Bridge farklı blokzincir ağları arasında varlık veya veri aktarımını sağlayan köprü sistemidir. Zero-Knowledge Proof (ZK) ise bir bilginin veya hesaplamanın doğruluğunu, gizli olan asıl veriyi karşı tarafa açmadan matematiksel olarak kanıtlayan 
 yöntemdir.   
@@ -410,14 +410,15 @@ Kendi Sözleşmem 0x7c72...ab90: kayitliMi → true, tumKayitlar ve Registered e
 
 • Derleme Ayarları: Solidity v0.8.24, Optimization: No, EVM Version: default
 
-• Görevli Hesap (1. Eğitim Hesabı): [0x137E28988321C83Dd273345D691f9CE683a921Ff]
+• Görevli Hesap (1. Eğitim Hesabı): 0x137E28988321C83Dd273345D691f9CE683a921Ff
 
-• Yeni Sözleşme Adresi: [0x70dfe845e6bdb3917e8efe5fdb4c29c2361da074]
+• Yeni Sözleşme Adresi: 0x70dfe845e6bdb3917e8efe5fdb4c29c2361da074
 
 • Deploy Tx Hash: 
-[0xb56b95159b272eb8a892b2d25ef08f6c7b1eb5bdc2d4d2f92f35de493d4548bf]
+0xb56b95159b272eb8a892b2d25ef08f6c7b1eb5bdc2d4d2f92f35de493d4548bf
 
 • Sepolia İşlem ve Durum Kontrolleri:
+
 • 2. Eğitim Hesabı (0xBcF24Bfb837b328D9128C472C6e44b2Be31D6551) ile kayıt: kayitOl("trabzon61") çağrıldı. Tx Hash: 0xa4b5c1d7354d1c870d4cfadfff34a1f3776aacf774470982359b245e9687928c
 
 • 1. Eğitim Hesabı (Görevli) ile giriş onayı: girisOnayla(0xBcF2...d6551) çağrıldı. Tx Hash: 0x425b0872551eecee2359bb675ec2185f10578f01f11a6c99f4b370543c2ee9de
