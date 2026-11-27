@@ -19,7 +19,7 @@ Birbirleriyle İlişkisi:
 
 • Node bir blokzincirin protokol yazılımını çalıştıran kayıtların kopyasını tutan bir bilgisayar veya yazılımdır. Gelen işlemleri kontrol ederek diğer nodelara iletir.
 
-• Validatör genel olarak bir şeyin kurallara ve protokollere uygun olup olmadığını denetleyen bir yazılımdır. Blokzincirde Proof of Stake ve hisse kanıtı gibi konsensüs mekanizmalarda ağ üzerindeki işlemleri doğrulayan ve yeni bloklar üreten nodelara denir.
+• Validatör genel olarak bir şeyin kurallara ve protokollere uygun olup olmadığını denetleyen bir katılımcıdır. Blokzincirde Proof of Stake ve hisse kanıtı gibi konsensüs mekanizmalarda ağ üzerindeki işlemleri doğrulayan ve yeni bloklar üreten nodelara denir.
 
 • Konsensüs nodeların hangi protokollerin geçerli olduğu ve blokzincirin güncel durumu üzerinden bir anlaşmaya varmasını sağlar. PoW işlem gücüne ve fiziksel enerjiye dayanır, yeni bir bloğun onaylanması için bilgisayar donanımları kullanılır. PuS'ta validatorler kendi kripto varlıklarını ağa kilitlerler ve bu miktara göre blok üretme hakkı kazanırlar.
 
@@ -59,7 +59,7 @@ Birbirleriyle İlişkisi:
 
 • Geliştirici tarafından geliştirilen insanların okuyabileceği kod derleyici tarafından ile EVM'nin anlayabileceği ikili bir bytecode'a çevrilir. Derlenen bytecodeunu özel bir dağıtım işlemiyle ağa gönderilmesine deploy denir.
 
-• ABI bir çeviri uygulamasıdır. Dış uygulamaların bytetaki olaylarla ve fonksiyonlarla nasıl iletişim kuracağını belirler. Kaynak kod derlendiği anda derleyici çıktısı olarak elde edilir. Ağ/Chain bilgileri ve istemci/bağlam bilgileri gerekir.
+• ABI bir arayüz tanımıdır. Dış uygulamaların bytetaki olaylarla ve fonksiyonlarla nasıl iletişim kuracağını belirler. Kaynak kod derlendiği anda derleyici çıktısı olarak elde edilir. Ağ/Chain bilgileri ve istemci/bağlam bilgileri gerekir.
 
 • Veri okumada ağ durumu değişmez ama statede güncellenir. Veri okumada ağ mutabakatı veya blok üretirimi gerekmez çoğunluk olarak yerel düğümden okunur. State'te ise işlem havuzuna girer ve bloğa alındıktan sonra ağda yürütülüp kesinleşir. Gas konusunda ise veri okumada normal bir kullanıcı ücret ödemezken state de yapılan işlemin ağda yayılması ve işlenmesi için gas ödenir. Veri okuma imza gerektirmezken state de gönderen hesabın özel anahtarıyla imzalanır.
 
@@ -250,11 +250,17 @@ Aynı cüzdanla ikinci kez register çağrısı yapılmak istendiğinde, sözle�
 İncelenen İşlem (Tx Hash):0xe9b7505e0c33d0b48957661e6af4f10ba0d879183f607b9f8b7ea09c125242ac
 
 • İşlem Alanlarının Açıklaması:
+
 • From: 0xBcF24Bfb837b328D9128C472C6e44b2Be31D6551 — İşlemi imzalayıp gönderen ve gas ücretini ödeyen cüzdan adresim (Account 2).
+
 • To: 0xdb9B1e94B5b69Df7e401DDbedE43491141047dB3 — İşlem MetaMask Akıllı Hesap (EIP-7702 / Delegation) üzerinden paketlendiği için dış hedef olarak bu sözleşme görünmektedir; içerideki çağrı doğrudan takımın QuantumKayit sözleşmesine (0x81Dd700C459BF2806A1B5F2a349c89f0106A9036) iletilmiştir.
+
 • Status: Success — İşlemin EVM tarafından hatasız yürütülüp 12219061 numaralı bloğa kesin olarak eklendiğini gösterir.
+
 • Gas Used / Ücret:806,023 gas Limit: 920,695, kullanım oranı %87.55 / 0.001209034512090345 ETH — Sözleşme fonksiyonunu çalıştırmak ve veriyi blokzincire yazmak için harcanan hesaplama miktarı ve ödenen toplam ağ ücreti.
+
 • Nonce: 0 — Bu cüzdan adresinden (Account 2) gönderilen ilk giden işlem olduğunu ve işlemlerin sırasını takip eden sayacı gösterir.
+
 • Input Data: Dış çağrıda MetaMask Delegation (redeemDelegations) parametreleri (_permissionContexts, _modes, _executionCallDatas) yer alır. _executionCallDatas alanında hedef sözleşme adresi (0x81dd...9036), register(string) fonksiyon seçicisi (f2c298be) ve parametre olarak gönderdiğim ahmetefeyilmaz metninin hex karşılığı 61686d657465666579696c6d617a bulunur.
 
 • Ekran Görüntüleri:
