@@ -403,9 +403,10 @@ Kendi Sözleşmem 0x7c72...ab90: kayitliMi → true, tumKayitlar ve Registered e
 
 • Sözleşme ve Deploy Bilgileri:
 
-• Dosya: contracts/EtkinlikKayitV3_abi.json
+• Dosya: contracts/EtkinlikKayitV3.sol
 
-• ABI Dosyası: abi/EtkinlikKayitV3.json 
+• ABI Dosyası: contracts/EtkinlikKayitV3_abi.json 
+
 • Ağ: Sepolia Testnet (Chain ID: 11155111)
 
 • Derleme Ayarları: Solidity v0.8.24, Optimization: No, EVM Version: default
