@@ -88,7 +88,7 @@ Birbirleriyle İlişkisi:
   • Pending işlemin havuza ulaştığı ve mempoolda beklediği daha bir bloğa eklenmediği aşamadır. Receipt işlemin bir bloğa alındıktan sonra yürütülen kayıt özetine denir. Hangi blokta işlendiğini, gas used değerini logları ve statusu içerir. Status işlemin EVM içinde başarılı mı yoksa başarısız mı olduğunu belirtir, genellikle 1 başarılı 0 başarısız kabul edilir. Hash yalnızca işlemin kimliğini gösterir işlemin pending olabileceğini başarısız olabileceğini veya diğer durumları ortaya koymaz. Kesin bir sonuç için receipt ile statuse baklılır.
 
 • İşlem Akış Şeması:
-İmzalama (İşlem verisi hazırlanıp private key ile imzalanır) → Gönderme (İmzalı işlem RPC üzerinden ağa iletilir ve txHash oluşur) → Bekleme / Pending (İşlem mempool havuzunda bloğa girmeyi bekler) → Bloğa Alınma (Doğrulayıcılar işlemi bloğa alıp EVM üzerinde çalıştırır ve receipt/status üretir) → Sonuç Kontrolü (Receipt üzerinden status değerinin 1 mi 0 mı olduğu kontrol edilir).
+İmzalama (İşlem verisi hazırlanıp private key ile imzalanır) → Gönderme (İmzalı işlem RPC üzerinden ağa iletilir ve txHash oluşur(0xe9b7505e0c33d0b48957661e6af4f10ba0d879183f607b9f8b7ea09c125242ac)) → Bekleme / Pending (İşlem mempool havuzunda bloğa girmeyi bekler) → Bloğa Alınma (Doğrulayıcılar işlemi bloğa alıp EVM üzerinde çalıştırır ve receipt/status üretir) → Sonuç Kontrolü (Receipt üzerinden status değerinin 1 mi 0 mı olduğu kontrol edilir).
 
 • Sonucunu öğrenemedim henüz netleşmemiş veya ağ/RPC kaynaklı ulaşılamamış bir durumu gösterirken, işlem başarısız (status = 0) işlemin çalışıp hata nedeniyle geri alındığı kesin olumsuz sonucu ifade eder.
 
@@ -104,7 +104,7 @@ yöntemdir.
 
 • DAO'yu en son öğrenmek istiyorum; çünkü önce blokzincir altyapısını, akıllı sözleşmelerin çalışmasını ve temel ağ/ölçekleme mekanizmalarını oturtup, yönetişim ve karar süreçlerini bu teknik temelin üzerine inşa etmek daha mantıklı geliyor.
 
-**IP09:Gerçek Bir Blokzincir Projesini İncele**
+**İP09:Gerçek Bir Blokzincir Projesini İncele**
 
 • Seçilen Proje: Safe (eski adıyla Gnosis Safe). Resmî sitesi: safe.global | Resmî dokümantasyonu: docs.safe.global.   
 
@@ -128,7 +128,7 @@ yöntemdir.
 
 • Benim yorumum: Bu programda öğrendiğim akıllı sözleşme mimarisi, zincir içi (on-chain) ile zincir dışı (off-chain) veri ayrımı, cüzdan güvenliği ve RPC/event tabanlı uygulama geliştirme konularının yarışmada en çok işe yarayacağını düşünüyorum. Şartnamede teknolojinin etkin kullanımı, uygulanabilirlik ve kaynak kod incelemesi öne çıktığı için hangi verinin zincirde tutulup hangisinin dışarıda işleneceğini doğru kurgulamak prototip geliştirirken belirleyici olacaktır.   
 
-**IP11:Çalışma Ortamını Hazırla**
+**İP11:Çalışma Ortamını Hazırla**
 
 • Git: Dosyalarda yapılan değişiklikleri adım adım takip etmeyi, geçmiş sürümlere dönmeyi ve ekip halinde çakışma olmadan kod geliştirmeyi sağlayan dağıtık bir versiyon kontrol sistemidir.
 
@@ -144,7 +144,7 @@ yöntemdir.
 
 • Bu kurulum sürecinde Remix IDE ve MetaMask'in doğrudan tarayıcı üzerinden akıllı sözleşme ve test ağıyla iletişim kurma yapısı benim için yeniydi.
 
-**IP12: Kendi Cüzdan Oluşturucunu Yaz**
+**İP12: Kendi Cüzdan Oluşturucunu Yaz**
 
 • Kullanılan Dönüşümler ve Kütüphane Çağrıları:
 
@@ -162,7 +162,7 @@ yöntemdir.
 
 • Uygulamamda gördüğüm üzere mnemonic (12 kelime) bütün cüzdan ağacının kökünü oluşturan ve birden fazla hesabı geri getirebilen bir yedekleme anahtarıdır, private key ise o mnemonic'ten belirli bir türetme yoluyla (m/44'/60'/0'/0/0) çıkarılan ve yalnızca tek bir Ethereum hesabının işlemlerini imzalamaya yarayan 32 baytlık gizli anahtardır.
  
-**IP13: MetaMask ile Karşılaştır ve Checksum Deneyi Yap**
+**İP13: MetaMask ile Karşılaştır ve Checksum Deneyi Yap**
 
 • İstenilen görevler ve karşılaştırmalar yapıldı ekran görüntüleri alındı.
 
@@ -173,3 +173,254 @@ yöntemdir.
 ![IP 13 ekran görüntüleri](images/2.png)
 
 ![IP 13 ekran görüntüleri](images/3.png)
+
+**İP14: Test ETH Kaynağını Kendin Bul**
+
+• Kullanılan Faucet: Google Cloud Web3 Ethereum Sepolia Faucet https://cloud.google.com/application/web3/faucet/ethereum/sepolia
+
+• Transaction Hash: 0x993a0f3653887078215914BAdCF039263293adD9
+
+• Adres yalnızca bakiye almak ve sorgulamak için kullanılır. Harcamayı yalnızca kullanıcıda bulunan private keyle yapabiliriz. Bu yüzden adres paylaşmak bir harcama yetkisi vermez.
+
+**İP 15: Test USDC Edin ve İki Transferi Karşılaştır**
+
+ • Transaction Hash: 0x5edac242b2eb3c745e100b5459aea97239264593a6b996ffb4556f7cf72a25fa
+
+• Kullanılan Faucet: Circle Testnet Faucet https://faucet.circle.com
+
+• Sepolia USDC Sözleşme Adresi: 0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238
+
+Hesaplar ve Kaynaklar:
+
+Account 1 (Gönderici): `0x137E28988321C83Dd273345D691f9CE683a921Ff`
+Account 2 (Alıcı):`0xBcF24Bfb837b328D9128C472C6e44b2Be31D6551`
+
+
+Yapılan Transferler:
+ETH Transferi (0.00001 ETH): 0xf82935083ff1436f365da1863a7be9cfb994ae0cdb8b413f859d6a2e4f68bff9 — Blok: `12218894`
+USDC Transferi (1 USDC): 0x83ce513270e0c45aa0fa0c4e29ed90a6827263dd8dcccc03bf3889fcf55a6aef — Blok: `12218895`
+
+**İki İşlemin Karşılaştırması:**
+
+| Alan | ETH Transferi (`0.00001 ETH`) | USDC Transferi (`1 USDC`) |
+| :--- | :--- | :--- |
+| **To (Alıcı)** | Doğrudan Account 2 adresi (`0xBcF24B...6551`) | USDC sözleşme adresi (`0x1c7D4B...7238`) |
+| **Value** | `0.00001 ETH` | `0 ETH` (native ETH gönderilmediği için) |
+| **Input Data** | Boş (`0x`) | `transfer(address,uint256)` fonksiyon çağrısı ve parametreleri |
+| **Ücret (Fee)** | Düşük — sabit 21.000 gas (`[Etherscan'deki ETH ücreti]`) | Daha yüksek — akıllı sözleşme çalıştığı için (`[Etherscan'deki ETH ücreti]`) |
+| **Token Transferi / Log** | Log yok (doğrudan native transfer) | `Logs` sekmesinde ERC-20 `Transfer` olayı (event) kayıtlı |
+
+• Circle faucet üzerinden 20 Test USDC istenildiğinde transfer blokzincirdeki USDC akıllı sözleşmesine işlenir ve varlık zincir üzerinde hesaba aktarılmış olur. MetaMask'te Tokenları içe aktar işlemi ise zincire herhangi bir veri yazmaz yalnızca cüzdan arayüzünün ilgili sözleşme adresini okuyup bakiyeyi ekranda göstermesini sağlar.
+
+
+• USDC transferini onaylarken MetaMask ekranında tahmini ağ ücretinin USDC değil SepoliaETH cinsinden hesaplandığını gördüm. İşlem onaylandıktan sonra Etherscan'deki Transaction Fee alanında ücretin ETH olarak ödendiğini cüzdanımdaki USDC bakiyesinin yalnızca gönderdiğim 1 USDC kadar azalırken işlem ücretinin doğrudan SepoliaETH bakiyemden düştüğünü doğruladım.
+
+**İP 16: Remix ile Gerçek İsmini Kaydet**
+
+
+• Sözleşme ve Hesap Bilgileri:
+Takım Sözleşmesi Adresi:0x81Dd700C459BF2806A1B5F2a349c89f0106A9036
+
+
+• Kayıt Yapılan Cüzdan (Account 2)0xBcF24Bfb837b328D9128C472C6e44b2Be31D6551
+
+
+•Gönderilen İsim Formatı:ahmetefeyilmaz
+
+
+• İşlem Özeti (Tx Hash)0x40d345abd2dd1daa30f74a9f4dbc353c581cf153945fdc7be2074131d0329d19
+
+
+• İşlem Sonucu:Başarılı (Success) — Kontrol sitesinde (haloclineblockchain.vercel.app) göründü.
+
+
+•Not: İlk denemede Account 1 0x137E28988321C83Dd273345D691f9CE683a921Ff ile boşluklu olarak Ahmet Efe Yılmaz kaydettim zincire işlendi ancak site formatına uymadığı için kontrol siteside gözükmedi. İstenen küçük harf/boşluksuz formatta kayıt Account 2 ile tamamlandım.
+
+
+• Aynı Cüzdanla İkinci Kayıt Denemesi:
+Aynı cüzdanla ikinci kez register çağrısı yapılmak istendiğinde, sözleşmedeki require(!kayitliMi[msg.sender], "Bu cuzdan zaten kayitli") kuralı nedeniyle cüzdan işlemi simüle ederken daha işlem zincire gönderilmeden önce gas tahmini aşamasında hata verdi. Gönderim engellendiği için uyarıyı zorla geçmedim dolayısıyla yeni bir tx hash oluşmadı.
+
+
+• Benim yorumum:
+İsmin kontrol sitesinde görünmesi ile zincirde kaydedilmiş olması aynı kontrol değildir. Sözleşme yalnızca adresin daha önce kayıt olup olmadığını denetler ve gönderilen metni (isim biçimine bakmaksızın) blokzincire kalıcı olarak yazar. Kontrol sitesi ise zincirdeki kayıtları okuyup yalnızca kendi belirlediği liste ve isim biçimiyle eşleşenleri ekranda filtreleyerek gösterir. Dolayısıyla bir kayıt zincirde başarılı olsa bile format uymazsa sitede görünmeyebilir ilk denemede yazdığımda görünmemesi gibi dolayısıyla kesin veri kaynağı blokzincirin kendisidir.
+
+**İP17:Explorer ile Kaydı Doğrula**
+
+İncelenen İşlem (Tx Hash):0xe9b7505e0c33d0b48957661e6af4f10ba0d879183f607b9f8b7ea09c125242ac
+
+• İşlem Alanlarının Açıklaması:
+• From: 0xBcF24Bfb837b328D9128C472C6e44b2Be31D6551 — İşlemi imzalayıp gönderen ve gas ücretini ödeyen cüzdan adresim (Account 2).
+• To: 0xdb9B1e94B5b69Df7e401DDbedE43491141047dB3 — İşlem MetaMask Akıllı Hesap (EIP-7702 / Delegation) üzerinden paketlendiği için dış hedef olarak bu sözleşme görünmektedir; içerideki çağrı doğrudan takımın QuantumKayit sözleşmesine (0x81Dd700C459BF2806A1B5F2a349c89f0106A9036) iletilmiştir.
+• Status: Success — İşlemin EVM tarafından hatasız yürütülüp 12219061 numaralı bloğa kesin olarak eklendiğini gösterir.
+• Gas Used / Ücret:806,023 gas Limit: 920,695, kullanım oranı %87.55 / 0.001209034512090345 ETH — Sözleşme fonksiyonunu çalıştırmak ve veriyi blokzincire yazmak için harcanan hesaplama miktarı ve ödenen toplam ağ ücreti.
+• Nonce: 0 — Bu cüzdan adresinden (Account 2) gönderilen ilk giden işlem olduğunu ve işlemlerin sırasını takip eden sayacı gösterir.
+• Input Data: Dış çağrıda MetaMask Delegation (redeemDelegations) parametreleri (_permissionContexts, _modes, _executionCallDatas) yer alır. _executionCallDatas alanında hedef sözleşme adresi (0x81dd...9036), register(string) fonksiyon seçicisi (f2c298be) ve parametre olarak gönderdiğim ahmetefeyilmaz metninin hex karşılığı 61686d657465666579696c6d617a bulunur.
+
+• Ekran Görüntüleri:
+• *Input Data (UTF-8 / Decode):![IP 17 ekran görüntüleri](images/4.png)  Gönderilen ahmetefeyilmaz verisi `View Input As → UTF-8 görünümünde doğrulandı.
+• *Logs (Registered Event):* ![IP 17 ekran görüntüleri](images/5.png) — Takım sözleşmesi 0x81dd700c459bf2806a1b5f2a349c89f0106a9036 tarafından üretilen Registered olayında adresim 0xBcF2...6551, ismim ahmetefeyilmaz ve sıram sira: 21 doğrulandı.
+
+• Read Contract (State) Kontrolü:
+kayitliMi(0xBcF24Bfb837b328D9128C472C6e44b2Be31D6551) true döndü.
+tumKayitlar → Listede adresimin karşısında ahmetefeyilmaz isminin ve 21 numaralı kayıt sırasının saklandığı doğrulandı.
+
+İkinci Kayıt Denemesi:
+Aynı cüzdanla yapılan ikinci register denemesinde kayıt zaten olduğu için işlem oluşmamıştır.
+
+Benim yorumum:
+
+• Input data sözleşmeye ne gönderildi sorusunun cevabını verir. Event işlem gerçekleşirken tarihsel olarak ne oldu sorusuna cevap verir. Mevcut state ise sözleşmenin şuanki güncel durumu nedir sorusunu cevaplar.
+
+**İP 18: Takım Sözleşmesinin Kopyasını Deploy Et ve Verify Et**
+
+• Kaynak Kod ve Lisans:
+Takımın QuantumKayit.sol sözleşme kodu, MIT lisans bilgisi korunarak ve kaynak adresi (0x81Dd700C459BF2806A1B5F2a349c89f0106A9036) belirtilerek repoya eklendi.
+
+• Derleme ve Doğrulama (Verify) Ayarları:
+
+•Compiler Type: Solidity (Single file)
+
+• Compiler Version:v0.8.24+commit.e11b9ed9
+
+• Optimization: No (200 runs)
+
+• EVM Version: default
+
+• License: MIT License (MIT)
+
+• Constructor Arguments: Yok (boş)
+
+• Yeni Sözleşme ve Deploy Bilgileri:
+
+• Kendi Sözleşme Adresim: 0x7c72f96b0496ff006d1093e7dc1c9cee05caab90
+
+•Deploy tx Hash: 0xa02d3a5595f388d15b7e25617b025ab23001818fdc6ed8fb654ec47c7e78bf4f
+
+Durum: Sepolia ağına başarıyla yayınlandı ve Etherscan üzerinde doğrulandı (Verified).
+
+• State (Durum) Bağımsızlığı Kontrolü:
+Aynı kaynak koddan yeni bir kopya yayınlandığında blokzincirde tamamen yeni ve boş bir bellek (state) oluşur. Takım sözleşmesindeki 21 kayıt ve benim kaydım bu yeni kopyaya aktarılmaz; her sözleşme adresi kendi bağımsız durumunu tutar.
+
+• Deploy blokzincirde yeni bir işlem göndererek sözleşme örneğini sıfırdan yayınlar at address ise yeni bir sözleşme oluşturmaz mevcut bir sözleşmeyi remixe bağlar ve o sözleşmeyle etkileşim kurmasını sağlar.
+
+• Ethereum'da veriler kaynak kodunun içinde değil direkt olarak sözleşmenin yayınlandığı adrese bağlı olan bağımsız bir depolama alanında tutulur. Aynı kaynak kodu tekrar Deploy edildiğinde blokzincirde tamamen yeni bir sözleşme adresi ve tamamen sıfırdan boş bir depolama alanı oluşturulur. Yani kod aynı olsa bile iki adres birbirinden tamamen birbirinden ayrı bir şekilde çalışır ve eski adresteki kayıtlar yeni adrese otomatik olarak taşınmaz.
+
+**İP 19: Etherscan Write Contract ile Kendi Sözleşmene Kaydol**
+
+• Kendi Sözleşmemde Kayıt İşlemi:
+
+• Kendi Sözleşme Adresim: 0x7c72f96b0496ff006d1093e7dc1c9cee05caab90
+
+• Kayıt Yapılan Cüzdan (Account 2):0xBcF24Bfb837b328D9128C472C6e44b2Be31D6551
+
+•Gönderilen İsim: ahmetefeyilmaz
+
+• Tx Hash: 0x40d345abd2dd1daa30f74a9f4dbc353c581cf153945fdc7be2074131d0329d19
+
+
+• Read Contract ve Event Kontrolü (Takım vs. Kendi Sözleşmem):
+Kendi Sözleşmem 0x7c72...ab90: kayitliMi → true, tumKayitlar ve Registered event logunda sira: 1, isim: ahmetefeyilmaz, zaman: 1795729116` olarak doğrulandı.
+
+• Takım Sözleşmesi 0x81Dd...9036: Aynı cüzdan 0xBcF2...6551 takım sözleşmesinde 0xe9b7505e0c33d0b48957661e6af4f10ba0d879183f607b9f8b7ea09c125242ac işlemiyle sira: 21 olarak kayıtlıdır. İki sözleşmenin adresleri, işlem hash'leri ve kayıt sıraları birbirinden tamamen bağımsızdır.
+
+• Remix ve Etherscan'in Aynı Ağdaki Sözleşmelere İşlem Göndermesi (README Açıklaması):
+
+• Remix de Etherscan de blokzincirin kendisi değil, yalnızca birer arayüzdür. İkisi de sözleşmenin ABI fonksiyon tanımları bilgisini kullanarak çağrıyı Input hex formatına çevirir ve MetaMask cüzdanına işlemesi için iletir. MetaMask işlemi kullanıcının özel anahtarıyla imzalayıp Sepolia RPC düğümü üzerinden aynı blokzincir ağına yayınlar. Bu sayede farklı arayüzler kullansak da işlemler aynı ağdaki aynı sözleşmelere ulaşır.
+
+• Sözleşmedeki require(!kayitliMi[msg.sender]) kontrolü tüm blokzincir genelinde değil, yalnızca çağrılan sözleşme adresinin kendi depolama alanında (storage) çalışır. Cüzdanım takım sözleşmesinin kayitliMi tablosunda true olduğu için oraya ikinci kez kaydolamadı ancak kendi yayınladığım kopya farklı bir adreste ve sıfırdan boş bir depolama alanıyla başladığı için kayitliMi değeri false idi ve aynı cüzdanla sorunsuz şekilde ilk kayıt sira: 1 olarak eklenebildi.
+
+**İP20: İlk Etkinlik Kaydını Oluştur**
+
+• Sözleşme Özeti:
+• Dosya: contracts/EtkinlikKayit.sol
+• Etkinlik Adı: Erciyes Blockchain Atolyesi
+• Ortam: Remix VM (yerel test ağı — Sepolia'ya henüz gönderilmedi).
+
+• Yerel Hesap Testleri:
+
+• 1. Yerel Hesap (0x137E28988321C83Dd273345D691f9CE683a921Ff): kayitOl "ahmet" çağrıldı kayitGetir sonucu: "ahmet"
+
+• 2. Yerel Hesap (0xBcF24Bfb837b328D9128C472C6e44b2Be31D6551): kayitOl "trabzon_61" çağrıldı kayitGetir sonucu: "trabzon_61"
+
+• Verinin Nerede Tutulduğu ve msg.sender'ın Görevi:
+ etkinlikAdi ve katilimcilar (mapping(address => string)) değişkenleri sözleşmenin kalıcı depolama alanında storage de tutulmaktadır. Her adresin kaydı o adresin anahtarı kullanılarak anahtarın altında saklanır. Msg sender fonksiyonu o an çağıran cüzdanın adresini otomatik olarak verir. Fonksiyon dışarıdan hedef adres parametresi almayıp doğrudan katilimcilar[msg.sender] yazdığı için bir kullanıcı başkasının adresi adına kayıt yapamaz veya başkasının kaydını değiştiremez.
+
+• Bu ilk sürüm henüz temel veri kaydını yapıyor ancak şu yanlış kullanımları engellemiyor: Boş veya sadece boşluktan oluşan takma ad. Tekrar kayıt / üzerine yazma: Aynı cüzdan kayitOl fonksiyonunu tekrar çağırarak mevcut kaydını sınırsızca değiştirebilir kısaca tek bir kayıt kuralu bulunmamakta.
+
+
+**İP21:Kapasite ve Kayıt Kurallarını Ekle**
+
+• Eklenen Kurallar:
+
+• Dosya: contracts/EtkinlikKayitV2.sol 
+
+• Boş ad kontrolü: require(bytes(takmaAd).length > 0, "Takma ad bos olamaz") kuralı eklendi.
+
+• Tekrar kayıt kontrolü: require(!kayitliMi[msg.sender], "Bu adres zaten kayitli") kuralı eklendi.
+
+• Kapasite kontrolü: KAPASITE = 3 olarak belirlendi, toplamKayit dışarıdan okunabilir yapıldı ve require(toplamKayit < KAPASITE, "Etkinlik kapasitesi doldu") kuralı eklendi.
+
+• Yerel Ortam (Remix VM) Test Sonuçları:
+
+• 1. Deneme (İlk geçerli kayıt - 1. hesap): Beklenen sonuç kabul ve toplam 1. Gözlemlenen sonuç işlem başarılı, toplamKayit = 1.
+
+• 2. Deneme (Aynı hesaptan tekrar kayıt - 1. hesap): Beklenen sonuç ret ve toplam 1. Gözlemlenen sonuç revert (Bu adres zaten kayitli), toplamKayit = 1.
+
+• 3. Deneme (Yeni hesaptan boş ad - 2. hesap): Beklenen sonuç ret ve toplam 1. Gözlemlenen sonuç revert (Takma ad bos olamaz), toplamKayit = 1.
+
+• 4. Deneme (İkinci ve üçüncü geçerli kayıt - 2. ve 3. hesap): Beklenen sonuç kabul ve toplam 3. Gözlemlenen sonuç iki işlem de başarılı, toplamKayit = 3.
+
+• 5. Deneme (Dördüncü farklı hesabın kaydı - 4. hesap): Beklenen sonuç ret ve toplam 3. Gözlemlenen sonuç revert (Etkinlik kapasitesi doldu), toplamKayit = 3.
+
+• Reddedilen hiçbir işlem toplamKayit sayacını artırmadı ve state'i değiştirmedi.
+
+• Blokzincirde cüzdan adresleri gerçek dünya kimliklerine bağlı değildir. Tek bir kişi kendi isteğine göre istediği kadar cüzdan oluşturabilir. Bu yüzden sözleşmedeki adres başına 1 kayıt kuralı yalnızca cüzdan başına bir sınır koyar tek bir kişinin 3 farklı cüzdan açıp tüm 3 kişilik kontenjanı tek başına doldurmasını engelleyemez.
+
+**İP22:Görevli ve Giriş Kontrolünü Ekle**
+
+• Eklenen Özellikler:
+• Dosya: contracts/EtkinlikKayitV3.sol (Önceki sürümler korunarak yeni sürüm eklendi.)
+• Görevli yetkisi: constructor içinde gorevli = msg.sender olarak belirlendi ve sadeceGorevli modifier'ı ile giriş onaylama yetkisi yalnızca görevliye verildi.
+• Giriş kontrolleri: girisYaptiMi mapping'i eklendi. Kayıtsız adrese giriş verilmesi ve aynı adresin ikinci kez giriş yapması require kontrolleriyle engellendi.
+• Event'ler: Başarılı kayıtta KayitYapildi(katilimci, takmaAd) ve başarılı girişte GirisYapildi(katilimci) event'leri yayımlandı.
+
+• Yerel Ortam (Remix VM) Test Sonuçları:
+
+• 1. Deneme (Görevli kayıtlı kişiye giriş verir): girisYaptiMi = true oldu ve GirisYapildi event'i oluştu.
+
+• 2. Deneme (Görevli olmayan hesap giriş verir):Gözlemlenen sonuç revert durum değişmedi.
+
+• 3. Deneme (Görevli kayıtsız adrese giriş verir): Gözlemlenen sonuç revert.
+
+• 4. Deneme (Aynı katılımcıya ikinci giriş):Gözlemlenen sonuç revert ilk giriş kaydı korundu.
+
+• Önceki kapasite (3 kişi), boş ad ve tekrar kayıt kuralları da yeni sürümde tekrar test edilip doğrulandı.
+
+• Web arayüzü yalnızca kullanıcının tarayıcısında çalışır görsel katmandır ve düğmeyi gizlemek gerçek bir güvenlik sağlamaz. Akıllı sözleşmeler blokzincirde herkese açıktır herhangi bir kullanıcı arayüzü tamamen atlayıp Etherscan, Remix veya kendi yazdığı bir script üzerinden doğrudan sözleşme fonksiyonunu çağırabilir yani yetki denetiminin arayüzde değil doğrudan sözleşme kodunun içinde (msg.sender == gorevli) yapılması zorunludur.
+
+**İP23:Etkinlik Sözleşmeni Sepolia'ya Taşı**
+
+• Sözleşme ve Deploy Bilgileri:
+
+• Dosya: contracts/EtkinlikKayitV3.sol
+
+• ABI Dosyası: abi/EtkinlikKayitV3.json 
+• Ağ: Sepolia Testnet (Chain ID: 11155111)
+
+• Derleme Ayarları: Solidity v0.8.24, Optimization: No, EVM Version: default
+
+• Görevli Hesap (1. Eğitim Hesabı): [0x137E28988321C83Dd273345D691f9CE683a921Ff]
+
+• Yeni Sözleşme Adresi: [0x70dfe845e6bdb3917e8efe5fdb4c29c2361da074]
+
+• Deploy Tx Hash: 
+[0xb56b95159b272eb8a892b2d25ef08f6c7b1eb5bdc2d4d2f92f35de493d4548bf]
+
+• Sepolia İşlem ve Durum Kontrolleri:
+• 2. Eğitim Hesabı (0xBcF24Bfb837b328D9128C472C6e44b2Be31D6551) ile kayıt: kayitOl("trabzon61") çağrıldı. Tx Hash: 0xa4b5c1d7354d1c870d4cfadfff34a1f3776aacf774470982359b245e9687928c
+
+• 1. Eğitim Hesabı (Görevli) ile giriş onayı: girisOnayla(0xBcF2...d6551) çağrıldı. Tx Hash: 0x425b0872551eecee2359bb675ec2185f10578f01f11a6c99f4b370543c2ee9de
+
+• Okuma sonuçları: toplamKayit = 1, kayitGetir(2. hesap) = "trabzon61", girisYaptiMi(2. hesap) = true olarak doğrulandı.
+
+• Aynı projenin yerel ve Sepolia sürümlerini karıştırmamak için öncelikle bağlı olunan ağı ve Chain ID bilgisini sözleşmenin yayınlandığı adresi, işlemi gönderen cüzdan adresini (yerel 100 ETH'lik test hesabı mı yoksa MetaMask eğitim hesabı mı) ve işlem hash'inin Sepolia Etherscan üzerinde görünüp görünmediğini kontrol ederim.
