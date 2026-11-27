@@ -178,7 +178,8 @@ yöntemdir.
 
 • Kullanılan Faucet: Google Cloud Web3 Ethereum Sepolia Faucet https://cloud.google.com/application/web3/faucet/ethereum/sepolia
 
-• Transaction Hash: 0x993a0f3653887078215914BAdCF039263293adD9
+• Transaction Hash: 
+0xe7fb346db7d704d409041e483212cdd14c081536c227008c5e89c5ba904eaad3
 
 • Adres yalnızca bakiye almak ve sorgulamak için kullanılır. Harcamayı yalnızca kullanıcıda bulunan private keyle yapabiliriz. Bu yüzden adres paylaşmak bir harcama yetkisi vermez.
 
@@ -207,7 +208,7 @@ USDC Transferi (1 USDC): 0x83ce513270e0c45aa0fa0c4e29ed90a6827263dd8dcccc03bf388
 | **To (Alıcı)** | Doğrudan Account 2 adresi (`0xBcF24B...6551`) | USDC sözleşme adresi (`0x1c7D4B...7238`) |
 | **Value** | `0.00001 ETH` | `0 ETH` (native ETH gönderilmediği için) |
 | **Input Data** | Boş (`0x`) | `transfer(address,uint256)` fonksiyon çağrısı ve parametreleri |
-| **Ücret (Fee)** | Düşük — sabit 21.000 gas (`[Etherscan'deki ETH ücreti]`) | Daha yüksek — akıllı sözleşme çalıştığı için (`[Etherscan'deki ETH ücreti]`) |
+| **Ücret (Fee)** | Düşük — sabit 21.000 gas (0.000227668502276685 ) | Daha yüksek — akıllı sözleşme çalıştığı için (0.000306900003069 ) |
 | **Token Transferi / Log** | Log yok (doğrudan native transfer) | `Logs` sekmesinde ERC-20 `Transfer` olayı (event) kayıtlı |
 
 • Circle faucet üzerinden 20 Test USDC istenildiğinde transfer blokzincirdeki USDC akıllı sözleşmesine işlenir ve varlık zincir üzerinde hesaba aktarılmış olur. MetaMask'te Tokenları içe aktar işlemi ise zincire herhangi bir veri yazmaz yalnızca cüzdan arayüzünün ilgili sözleşme adresini okuyup bakiyeyi ekranda göstermesini sağlar.
@@ -228,7 +229,7 @@ Takım Sözleşmesi Adresi:0x81Dd700C459BF2806A1B5F2a349c89f0106A9036
 •Gönderilen İsim Formatı:ahmetefeyilmaz
 
 
-• İşlem Özeti (Tx Hash)0x40d345abd2dd1daa30f74a9f4dbc353c581cf153945fdc7be2074131d0329d19
+• İşlem Özeti (Tx Hash)0xe9b7505e0c33d0b48957661e6af4f10ba0d879183f607b9f8b7ea09c125242ac
 
 
 • İşlem Sonucu:Başarılı (Success) — Kontrol sitesinde (haloclineblockchain.vercel.app) göründü.
@@ -402,7 +403,7 @@ Kendi Sözleşmem 0x7c72...ab90: kayitliMi → true, tumKayitlar ve Registered e
 
 • Sözleşme ve Deploy Bilgileri:
 
-• Dosya: contracts/EtkinlikKayitV3.sol
+• Dosya: contracts/EtkinlikKayitV3_abi.json
 
 • ABI Dosyası: abi/EtkinlikKayitV3.json 
 • Ağ: Sepolia Testnet (Chain ID: 11155111)
